@@ -31,19 +31,9 @@ INSTALLED_APPS = [
     'django_js_reverse',
     'django_crypto_fields.apps.AppConfig',
     'django_revision.apps.AppConfig',
-    'edc_appointment.apps.AppConfig',
     'edc_base.apps.AppConfig',
-    'edc_base_test.apps.AppConfig',
-    'edc_consent.apps.AppConfig',
     'edc_dashboard.apps.AppConfig',
-    'edc_device.apps.AppConfig',
-    'edc_identifier.apps.AppConfig',
     'edc_model_wrapper.apps.AppConfig',
-    'edc_protocol.apps.AppConfig',
-    'edc_visit_schedule.apps.AppConfig',
-    'edc_visit_tracking.apps.AppConfig',
-    'edc_timepoint.apps.AppConfig',
-    'edc_registration.apps.AppConfig'
 ]
 
 MIDDLEWARE = [
@@ -130,8 +120,6 @@ KEY_PATH = os.path.join(BASE_DIR, 'crypto_fields')
 GIT_DIR = BASE_DIR
 
 DASHBOARD_URL_NAMES = {
-    'subject_listboard_url': 'edc_subject_dashboard:subject_listboard_url',
-    'subject_dashboard_url': 'edc_subject_dashboard:subject_dashboard_url',
 }
 
 if 'test' in sys.argv:

@@ -1,7 +1,4 @@
-from django.contrib import admin
 from django.contrib.admin import AdminSite as DjangoAdminSite
-
-from .models import SubjectVisit
 
 
 class AdminSite(DjangoAdminSite):
@@ -12,8 +9,3 @@ class AdminSite(DjangoAdminSite):
 
 
 edc_dashboard_admin = AdminSite(name='edc_dashboard_admin')
-
-
-@admin.register(SubjectVisit, site=edc_dashboard_admin)
-class SubjectVisitAdmin(admin.ModelAdmin):
-    pass

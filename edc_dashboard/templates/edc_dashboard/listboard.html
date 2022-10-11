@@ -6,78 +6,80 @@
 {% load static %}
 {% load edc_base_extras %}
 
-{% block main %}
+{% block content %}
 <!-- start listboard main block-->
 {% block extra_content%}
 {% endblock extra_content %}
-<div class="panel-group">
-<div class="panel panel-{{ listboard_panel_style }}">
-<div class="panel-heading">
+<div class='container-fluid'>
+    <div id="accordion" class="card mb-4">
+        <div class="card">
+            <div class="card-header">
+                <div class="alert alert-{{ listboard_panel_style }} alert-dismissible fade show" role="alert">
+                <span class="alert-icon"><i class="{{ listboard_fa_icon }} fa-2x"></i></span>
+                <span class="alert-text">
+                    {% block alert_message %}
+                    {% endblock alert_message %}
+                </span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <a class="btn btn-outline-secondary me-4" data-bs-toggle="collapse" href="#collapseOne">
+                {% block card_title %}{% endblock card_title %}
+                <span class="badge bg-gradient-secondary">{{ results|length  }}</span>
+            </a>
+            {% block add_client_button %}
+            {%endblock add_client_button %}
 
-<i class="{{ listboard_fa_icon }} fa-2x"></i>
-                    
-<!-- begin search form -->
-<span class="pull-right">
-    {% block listboard_search_form %}
-        {% include 'edc_dashboard/search_form.html' %}
-    {% endblock listboard_search_form %}
-</span>
-<!-- end search form -->
+        </div>
+        <div id="collapseOne" class="collapse show" data-bs-parent="#accordion">
+            <div class="card-body">
+                <div class="card">
+                    <div class="table-responsive">
+                        <!-- begin search form -->
+                        {% block listboard_search_form %}
+                            {% include 'edc_dashboard/search_form.html' %}
+                        {% endblock listboard_search_form %}
+                        <!-- end search form -->
+                        <table class="table align-items-center mb-0">
+                            {% block listboard_table_header %}
+                                {% include 'edc_dashboard/listboard/results_header.html' %}
+                            {% endblock listboard_table_header %}
+                            <tbody>
+                                {% block listboard_table_body %}
+                                    {% for result in results %}
+                                        <tr> 
+                                        <td>
+                                            <div class="d-flex px-3">
+                                                <span class="text-secondary text-xs">{{ forloop.counter }}</span>
+                                            </div>
+                                        </td>
+                                        {% block listboard_table_columns %}
+                                            {% include 'edc_dashboard/listboard/columns.html' %}
+                                        {% endblock listboard_table_columns %}
+                                        {% block listboard_table_button_column %}
+                                            {% include 'edc_dashboard/listboard/buttons_column.html' %}
+                                        {% endblock listboard_table_button_column %}
+                                        </tr>                       
+                                    {% endfor %}
+                                {% endblock listboard_table_body %}
+                            </tbody>
+                        </table>
+                        <!-- begin spacer rows -->
+                        <table>
+                            <tr><td>&nbsp;</td></tr>
+                            <tr><td>&nbsp;</td></tr>
+                            <tr><td>&nbsp;</td></tr>
+                            <tr><td>&nbsp;</td></tr>
+                            <tr><td>&nbsp;</td></tr>
+                            {% paginator_row %}
+                        </table>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}               
 
-{% block listboard_panel %}
-{% endblock listboard_panel %}
-
-</div> <!--end panel heading -->
-
-
-<!-- begin table -->
-<div class="table table-responsive">
-<table class="table table-condensed table-hover small">
-<thead>
-
-{% block listboard_table_header %}
-    {% include 'edc_dashboard/listboard/results_header.html' %}
-{% endblock listboard_table_header %}
-
-</thead><tbody>
-
-{% block listboard_table_body %}
-
-    {% for result in results %}
-        <tr> 
-        
-        <td>{{ forloop.counter }}</td>
-        
-        {% block listboard_table_button_column %}
-            {% include 'edc_dashboard/listboard/buttons_column.html' %}
-        {% endblock listboard_table_button_column %}
-    
-        {% block listboard_table_columns %}
-            {% include 'edc_dashboard/listboard/columns.html' %}
-        {% endblock listboard_table_columns %}
-        </tr>                       
-    
-    {% endfor %}
-
-{% endblock listboard_table_body %}
-
-</tbody></table>
-
-<!-- begin spacer rows -->
-<table>
-<tr><td>&nbsp;</td></tr>
-<tr><td>&nbsp;</td></tr>
-<tr><td>&nbsp;</td></tr>
-<tr><td>&nbsp;</td></tr>
-<tr><td>&nbsp;</td></tr>
-</table>
-<!-- end spacer rows -->
-
-</div><!-- end table -->
-
-{% paginator_row %}
-
-</div>  <!--end panel -->
-</div> <!--end panel-group -->
-<!-- end listboard main block -->
-{% endblock main %}

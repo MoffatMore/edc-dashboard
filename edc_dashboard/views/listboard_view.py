@@ -6,7 +6,8 @@ from django.db.models import Q
 from django.utils.text import slugify
 from django.views.generic.list import ListView
 from edc_base.sites import SiteQuerysetViewMixin
-from edc_dashboard.view_mixins import UrlRequestContextMixin, TemplateRequestContextMixin
+from edc_dashboard.view_mixins import (
+    UrlRequestContextMixin, TemplateRequestContextMixin)
 
 from ..view_mixins import QueryStringViewMixin
 
@@ -26,7 +27,7 @@ class Base(QueryStringViewMixin, UrlRequestContextMixin,
 
     # default, info, success, danger, warning, etc. See Bootstrap.
     listboard_panel_style = 'default'
-    listboard_fa_icon = "far fa-user-circle"
+    listboard_fa_icon = "fa fa-user-circle"
 
     model = None  # label_lower model name
     model_wrapper_cls = None
