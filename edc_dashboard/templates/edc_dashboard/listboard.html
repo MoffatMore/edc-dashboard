@@ -82,6 +82,14 @@
         $('#myTable').DataTable({
             paging: false,
             stateSave: true,
+            dom: 'Bfrtip',
+            buttons: [
+                'excel',
+                'pdf',
+                'print'
+            ],
+            responsive: true,
+            keys: true,
         });
     });
 </script>
