@@ -19,9 +19,9 @@ class UrlConfig:
         """ Returns url patterns.
         """
         urlpatterns = [
-                re_path(r'^' + f'{self.label}/'
-                f'(?P<{self.identifier_label}>{self.identifier_pattern})/',
-                self.view_class.as_view(), name=self.url_name)
+            re_path(r'^' + f'{self.label}/'
+                    f'(?P<{self.identifier_label}>{self.identifier_pattern})/',  # noqa
+                    self.view_class.as_view(), name=self.url_name)
         ]
         return urlpatterns
 

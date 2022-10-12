@@ -32,6 +32,7 @@ class Base(QueryStringViewMixin, UrlRequestContextMixin,
     model = None  # label_lower model name
     model_wrapper_cls = None
     ordering = '-created'
+    dashboard_url = None
 
     orphans = 3
     paginate_by = 10
@@ -59,6 +60,10 @@ class Base(QueryStringViewMixin, UrlRequestContextMixin,
         context = self.add_url_to_context(
             new_key='listboard_url',
             existing_key=self.listboard_url,
+            context=context)
+        context = self.add_url_to_context(
+            new_key='dashboard_url',
+            existing_key=self.dashboard_url,
             context=context)
         context = self.add_url_to_context(
             new_key='paginator_url',

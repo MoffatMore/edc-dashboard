@@ -4,11 +4,11 @@
 	<form  action="{% if search_form_url_reversed %}{{ search_form_url_reversed }}{% endif %}" class="form-inline" id="form-search" method="get" >
         <div class="form-group" >
             <div class="input-group has-success">
-				<div class="col-auto">
-					<div class="bg-white border-radius-lg d-flex me-2">
-						<input type="text" class="form-control border-1 ps-3" id="id_q"  name="q" placeholder="search" type="text" value="{{ q|default:'' }}">
-						<button type="submit" class="btn bg-gradient-primary my-0 me-3"><i class="fa fa-search fa-sm"></i></button>
-					</div>
+				<div class="form-group d-flex me-2">
+					<input type="text" class="form-control border-1 ps-3" id="id_q"  name="q" placeholder="search" type="text" value="{{ q|default:'' }}"  aria-label="Search" aria-describedby="button-addon2">
+					<button class="btn bg-gradient-secondary my-0 me-1" type="submit" id="button-addon2">
+						<i class="fa fa-search fa-2x cursor-pointer"></i>
+					</button>
 				</div>
 				{% if listboard_view_filters %}
 					<button  type="button" class="btn btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
