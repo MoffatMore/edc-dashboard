@@ -1,13 +1,8 @@
-<td class="align-middle text-center">
-    <a href="{% url dashboard_url result.file_number %}" class="me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Open file" data-container="body" data-animation="true">
-        <i class="fa fa-folder-open text-info cursor-pointer"></i>
-    </a>
-    <a href="{{ result.href }}" class="me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit file" data-container="body" data-animation="true">
-        <i class="fa fa-pencil cursor-pointer text-warning"></i>
-    </a>
-    <a href="{{ result.href }}&edc_readonly=1" data-bs-toggle="tooltip" data-bs-placement="top" title="View file" data-container="body" data-animation="true">
-        <i class="fa fa-eye text-secondary cursor-pointer"></i>
-    </a>
-</td>
+<a href="{{ result.href }}" class="me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit file" data-container="body" data-animation="true">
+    <i class="fa fa-pencil cursor-pointer text-warning"></i>
+</a>
+<a href="{{ result.href }}&edc_readonly=1" class="me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="View file" data-container="body" data-animation="true">
+    <i class="fa fa-eye text-secondary cursor-pointer"></i>
+</a>
 
 

@@ -6,10 +6,6 @@
 {% load static %}
 {% load edc_base_extras %}
 
-{%block stylesheets%}
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/jszip-2.5.0/dt-1.12.1/af-2.4.0/b-2.2.3/b-colvis-2.2.3/b-html5-2.2.3/b-print-2.2.3/cr-1.5.6/date-1.1.2/fc-4.1.0/fh-3.2.4/kt-2.7.0/r-2.3.0/rg-1.2.0/rr-1.2.8/sc-2.0.7/sb-1.3.4/sp-2.0.2/sl-1.4.0/sr-1.1.1/datatables.min.css"/>
-{% endblock stylesheets%}
-
 {% block content %}
 <!-- start listboard main block-->
 <div class='container-fluid'>
@@ -37,36 +33,48 @@
 
         <div id="collapseOne" class="collapse show" data-bs-parent="#accordion">
             <div class="card-body">
-                <div class="table-responsive table-stripped">
-                    <!-- begin search form -->
-                    <!-- end search form -->
-                    <table class="table table-hover" id="myTable">
-                        {% block listboard_table_header %}
-                            {% include 'edc_dashboard/listboard/results_header.html' %}
-                        {% endblock listboard_table_header %}
-                        <tbody>
-                            {% block listboard_table_body %}
-                                {% for result in results %}
-                                    <tr> 
-                                    <td>
-                                        <div class="d-flex px-3">
-                                            <span class="text-secondary text-xs">{{ forloop.counter }}</span>
-                                        </div>
-                                    </td>
-                                    {% block listboard_table_columns %}
-                                        {% include 'edc_dashboard/listboard/columns.html' %}
-                                    {% endblock listboard_table_columns %}
-                                    {% block listboard_table_button_column %}
-                                        {% include 'edc_dashboard/listboard/buttons_column.html' %}
-                                    {% endblock listboard_table_button_column %}
-                                    </tr>                       
+                {% block listboard %}
+                    <div class="table-responsive table-stripped">
+                        <table class="table table-hover" id="myTable" style="width: 100%;">
+                            {% block listboard_table_header %}
+                                {% include 'edc_dashboard/listboard/results_header.html' %}
+                            {% endblock listboard_table_header %}
+                            <tbody>
+                                {% block listboard_table_body %}
+                                    {% for result in results %}
+                                        <tr> 
+                                            <td>
+                                                <div class="d-flex px-3">
+                                                    <span class="text-secondary text-xs">{{ forloop.counter }}</span>
+                                                </div>
+                                            </td>
+                                            {% block listboard_table_columns %}
+                                                {% include 'edc_dashboard/listboard/columns.html' %}
+                                            {% endblock listboard_table_columns %}
+                                            <td>
+                                                <div class="text-center">
+                                                    <span class="text-secondary text-xs">{{ result.report_datetime|date_from_timestamp }}</span>
+                                                </div>
+                                            </td>
+                                            {% block listboard_table_button_column %}
+                                            <td class="align-middle text-center">
+                                                <a href="{% url dashboard_url result.file_number %}" class="me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Open file" data-container="body" data-animation="true">
+                                                    <i class="fa fa-folder-open text-info cursor-pointer"></i>
+                                                </a>
+                                                {% include 'edc_dashboard/listboard/buttons_column.html' %}
+                                            </td>
+                                            {% endblock listboard_table_button_column %}
+                                        </tr>                       
                                     {% endfor %}
                                 {% endblock listboard_table_body %}
                             </tbody>
                         </table>
-                        <!-- begin spacer rows -->
-                        {% paginator_row %}
-                </div>
+                            <!-- begin spacer rows -->
+                        {% block pagination %}
+                            {% paginator_row %}
+                        {% endblock pagination %}
+                    </div>
+                {% endblock listboard %}
             </div>
         </div>
     </div>
@@ -89,9 +97,8 @@
                 'print'
             ],
             responsive: true,
-            keys: true,
         });
     });
 </script>
-{% endblock javascripts %}             
+{% endblock javascripts %}
 
