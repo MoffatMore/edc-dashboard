@@ -1,8 +1,10 @@
 from django.views.generic.base import TemplateView
-from edc_dashboard.view_mixins import UrlRequestContextMixin, TemplateRequestContextMixin
+from edc_dashboard.view_mixins import (TemplateRequestContextMixin,
+                                       UrlRequestContextMixin)
 
 
-class DashboardView(UrlRequestContextMixin, TemplateRequestContextMixin, TemplateView):
+class DashboardView(UrlRequestContextMixin,
+                    TemplateRequestContextMixin, TemplateView):
 
     dashboard_url = None
     dashboard_template = None

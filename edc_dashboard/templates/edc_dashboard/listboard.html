@@ -11,26 +11,16 @@
 <div class='container-fluid'>
     <div id="accordion" class="card mb-4">
         <div class="card-header">
-            <div class="alert alert-secondary alert-dismissible fade show" role="alert">
-                <span class="alert-icon"><i class="{{ listboard_fa_icon }}"></i></span>
-                <span class="alert-text">
-                    {% block alert_message %}
-                    {% endblock alert_message %}
-                </span>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        <a class="btn btn-outline-secondary me-4" data-bs-toggle="collapse" href="#collapseOne">
-            {% block card_title %}{% endblock card_title %}
-            <span class="badge bg-gradient-secondary">{{ results|length  }}</span>
-        </a>
-        {% block add_listboard_button %}
-            <a href="{{ button_add_url }}?next={{ listboard_url }}" class="btn bg-gradient-secondary btn-tooltip" data-bs-toggle="tooltip" data-bs-placement="top" title="New Individual Client File" data-container="body" data-animation="true">
-                <i class="fa fa-plus cursor-pointer"></i>
+            <a class="btn btn-outline-secondary me-4" data-bs-toggle="collapse" href="#collapseOne">
+                {% block card_title %}{% endblock card_title %}
+                <span class="badge bg-gradient-secondary">{{ results|length  }}</span>
             </a>
-        {% endblock add_listboard_button %}
-
+            {% block add_listboard_button %}
+                <a href="{{ button_add_url }}?next={{ listboard_url }}" class="btn bg-gradient-secondary btn-tooltip" data-bs-toggle="tooltip" data-bs-placement="top" title="New Individual Client File" data-container="body" data-animation="true">
+                    <i class="fa fa-plus cursor-pointer"></i>
+                </a>
+            {% endblock add_listboard_button %}
+        </div>
         <div id="collapseOne" class="collapse show" data-bs-parent="#accordion">
             <div class="card-body">
                 {% block listboard %}

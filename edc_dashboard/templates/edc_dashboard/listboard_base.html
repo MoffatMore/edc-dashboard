@@ -1,0 +1,49 @@
+{% load static %}
+{% load edc_base_extras %}
+{% load edc_dashboard_extras %}
+
+<div class="table-responsive table-stripped">
+    <!-- begin search form -->
+    <!-- end search form -->
+    <table class="table table-hover" id="myTable" style="width: 100%;">
+        {% block listboard_table_header %}
+            {% include 'edc_dashboard/listboard/results_header.html' %}
+        {% endblock listboard_table_header %}
+        <tbody>
+            {% block listboard_table_body %}
+                {% for result in results %}
+                    <tr> 
+                        <td>
+                            <div class="d-flex px-3">
+                                <span class="text-secondary text-xs">{{ forloop.counter }}</span>
+                            </div>
+                        </td>
+                        {% block listboard_table_columns %}
+                            {% include 'edc_dashboard/listboard/columns.html' %}
+                        {% endblock listboard_table_columns %}
+                        {% block listboard_table_button_column %}
+                        <td class="align-middle text-center">
+                            <a href="{% url dashboard_url result.file_number %}" class="me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Open file" data-container="body" data-animation="true">
+                                <i class="fa fa-folder-open text-info cursor-pointer"></i>
+                            </a>
+                            <a href="{{ result.href }}" class="me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit file" data-container="body" data-animation="true">
+                                <i class="fa fa-pencil cursor-pointer text-warning"></i>
+                            </a>
+                            <a href="{{ result.href }}&edc_readonly=1" data-bs-toggle="tooltip" data-bs-placement="top" title="View file" data-container="body" data-animation="true">
+                                <i class="fa fa-eye text-secondary cursor-pointer"></i>
+                            </a>
+                        </td>
+                        
+                        {% endblock listboard_table_button_column %}
+                        {% block extra_listboard_table_button_column %}
+                            {% include 'edc_dashboard/listboard/buttons_column.html' %}
+                        {% endblock extra_listboard_table_button_column %}
+                    </tr>                       
+                {% endfor %}
+            {% endblock listboard_table_body %}
+        </tbody>
+    </table>
+        <!-- begin spacer rows -->
+    {% block listboard_pagination %}
+    {% endblock listboard_pagination %}
+</div>
